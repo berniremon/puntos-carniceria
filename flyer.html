@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flyer WhatsApp - Berni Remon</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,700&family=Montserrat:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #1a1a1a; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; font-family: 'Montserrat', sans-serif; }
+
+.flyer {
+  width: 420px;
+  min-height: 750px;
+  background: #0a0a0a;
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+/* FONDO */
+.bg-pattern {
+  position: absolute; inset: 0;
+  background: 
+    linear-gradient(160deg, #0f3070 0%, #0a0a0a 45%, #0a0a0a 70%, #6b0000 100%);
+  z-index: 0;
+}
+.bg-lines {
+  position: absolute; inset: 0; z-index: 1;
+  background-image: repeating-linear-gradient(
+    -45deg, transparent, transparent 40px,
+    rgba(255,255,255,0.015) 40px, rgba(255,255,255,0.015) 41px
+  );
+}
+
+/* FRANJA TOP */
+.franja-top {
+  position: relative; z-index: 10;
+  background: linear-gradient(90deg, #0f3070, #1a4fa0, #0f3070);
+  padding: 10px 20px;
+  display: flex; align-items: center; justify-content: center;
+  gap: 10px;
+}
+.franja-top span {
+  color: #b8892a;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+.linea-dorada {
+  flex: 1; height: 1px;
+  background: linear-gradient(90deg, transparent, #b8892a, transparent);
+}
+
+/* LOGO AREA */
+.logo-area {
+  position: relative; z-index: 10;
+  text-align: center;
+  padding: 28px 20px 20px;
+}
+.logo-nombre {
+  font-family: 'Playfair Display', serif;
+  font-size: 42px;
+  font-weight: 900;
+  color: #ffffff;
+  line-height: 1;
+  text-shadow: 0 2px 20px rgba(26,79,160,0.8);
+  letter-spacing: -1px;
+}
+.logo-nombre em {
+  font-style: italic;
+  color: #b8892a;
+}
+.logo-toro { font-size: 22px; margin: 0 6px; }
+.logo-sub {
+  font-size: 9px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  margin-top: 6px;
+}
+.desde-badge {
+  display: inline-block;
+  background: #b8892a;
+  color: #fff;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  padding: 3px 10px;
+  border-radius: 2px;
+  margin-top: 8px;
+  text-transform: uppercase;
+}
+
+/* SEPARADOR */
+.sep {
+  position: relative; z-index: 10;
+  display: flex; align-items: center;
+  padding: 0 24px; margin: 4px 0;
+  gap: 10px;
+}
+.sep-line { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(184,137,42,0.6), transparent); }
+.sep-icon { color: #b8892a; font-size: 14px; }
+
+/* HERO */
+.hero {
+  position: relative; z-index: 10;
+  text-align: center;
+  padding: 24px 24px 20px;
+}
+.hero-eyebrow {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #b8892a;
+  margin-bottom: 12px;
+}
+.hero-titulo {
+  font-family: 'Playfair Display', serif;
+  font-size: 38px;
+  font-weight: 900;
+  color: #ffffff;
+  line-height: 1.1;
+  margin-bottom: 8px;
+}
+.hero-titulo .highlight {
+  color: #b8892a;
+  font-style: italic;
+}
+.hero-sub {
+  font-size: 13px;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.5;
+  margin-top: 10px;
+}
+
+/* REGLAS */
+.reglas {
+  position: relative; z-index: 10;
+  margin: 16px 20px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(184,137,42,0.3);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.regla {
+  display: flex;
+  align-items: center;
+  padding: 14px 18px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  gap: 14px;
+}
+.regla:last-child { border-bottom: none; }
+.regla-icono {
+  width: 38px; height: 38px;
+  background: linear-gradient(135deg, #1a4fa0, #0f3070);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 17px;
+  flex-shrink: 0;
+  border: 1px solid rgba(184,137,42,0.4);
+}
+.regla-texto { flex: 1; }
+.regla-titulo {
+  font-size: 13px;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 2px;
+}
+.regla-desc {
+  font-size: 11px;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.4;
+}
+.regla-valor {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 900;
+  color: #b8892a;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* CTA */
+.cta {
+  position: relative; z-index: 10;
+  margin: 16px 20px;
+  background: linear-gradient(135deg, #b8892a, #d4a840);
+  border-radius: 8px;
+  padding: 18px;
+  text-align: center;
+}
+.cta-titulo {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 900;
+  color: #fff;
+  margin-bottom: 4px;
+}
+.cta-sub {
+  font-size: 11px;
+  color: rgba(255,255,255,0.85);
+  font-weight: 600;
+}
+
+/* FOOTER */
+.footer {
+  position: relative; z-index: 10;
+  background: rgba(15,48,112,0.6);
+  padding: 14px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(184,137,42,0.3);
+  margin-top: 8px;
+}
+.footer-item {
+  display: flex; align-items: center; gap: 6px;
+  color: rgba(255,255,255,0.7);
+  font-size: 10px;
+  font-weight: 700;
+}
+.footer-item .fi-icon { font-size: 13px; }
+.footer-item span { color: #fff; }
+
+/* FRANJA BOT */
+.franja-bot {
+  position: relative; z-index: 10;
+  background: linear-gradient(90deg, #0f3070, #1a4fa0, #0f3070);
+  padding: 8px 20px;
+  text-align: center;
+}
+.franja-bot p {
+  color: rgba(255,255,255,0.6);
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.print-btn {
+  margin-top: 20px;
+  padding: 12px 28px;
+  background: #1a4fa0;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+}
+</style>
+</head>
+<body>
+
+<div class="flyer" id="flyer">
+  <div class="bg-pattern"></div>
+  <div class="bg-lines"></div>
+
+  <div class="franja-top">
+    <div class="linea-dorada"></div>
+    <span>⭐ Programa de Fidelización ⭐</span>
+    <div class="linea-dorada"></div>
+  </div>
+
+  <div class="logo-area">
+    <div class="logo-nombre">Berni <span class="logo-toro">🐂</span> Remon</div>
+    <div class="logo-sub">Carnicería</div>
+    <div class="desde-badge">Desde 1901</div>
+  </div>
+
+  <div class="sep">
+    <div class="sep-line"></div>
+    <div class="sep-icon">🥩</div>
+    <div class="sep-line"></div>
+  </div>
+
+  <div class="hero">
+    <div class="hero-eyebrow">✦ Ahora podés ahorrar comprando ✦</div>
+    <div class="hero-titulo">
+      Comprá y<br>acumulá<br><span class="highlight">descuentos</span>
+    </div>
+    <div class="hero-sub">
+      Cada compra te suma puntos.<br>
+      Usálos cuando quieras para pagar menos.
+    </div>
+  </div>
+
+  <div class="reglas">
+    <div class="regla">
+      <div class="regla-icono">🛒</div>
+      <div class="regla-texto">
+        <div class="regla-titulo">Cada $20.000 en compras</div>
+        <div class="regla-desc">Se suman automáticamente a tu cuenta</div>
+      </div>
+      <div class="regla-valor">100 pts</div>
+    </div>
+    <div class="regla">
+      <div class="regla-icono">💸</div>
+      <div class="regla-texto">
+        <div class="regla-titulo">Cada 100 puntos</div>
+        <div class="regla-desc">Canjeable en cualquier momento</div>
+      </div>
+      <div class="regla-valor">$1.000</div>
+    </div>
+    <div class="regla">
+      <div class="regla-icono">🎯</div>
+      <div class="regla-texto">
+        <div class="regla-titulo">¡Sin vencimiento!</div>
+        <div class="regla-desc">Tus puntos no se pierden nunca</div>
+      </div>
+      <div class="regla-valor">∞</div>
+    </div>
+  </div>
+
+  <div class="cta">
+    <div class="cta-titulo">¡Anotate gratis hoy!</div>
+    <div class="cta-sub">Presentá tu DNI en el mostrador y empezás a acumular</div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-item">
+      <span class="fi-icon">📍</span>
+      <span>Mitre y Basco</span>
+    </div>
+    <div class="footer-item">
+      <span class="fi-icon">📘</span>
+      <span>Carniceria Berni Remon</span>
+    </div>
+    <div class="footer-item">
+      <span class="fi-icon">📸</span>
+      <span>@berniremoncarniceria</span>
+    </div>
+  </div>
+
+  <div class="franja-bot">
+    <p>Recomendado por el 98% de nuestros clientes</p>
+  </div>
+</div>
+
+<button class="print-btn" onclick="window.print()">🖨️ Imprimir / Guardar como imagen</button>
+
+<style>
+@media print {
+  body { background: #fff; padding: 0; }
+  .print-btn { display: none; }
+  .flyer { border-radius: 0; }
+}
+</style>
+</body>
+</html>
